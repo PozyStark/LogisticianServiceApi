@@ -1,0 +1,18 @@
+
+ {% extends 'logistic_service/base.html' %}
+{% load static %}
+
+{%block HeaderBlock%}
+
+{%endblock%}
+
+{% block Title %}
+    Регистрация выполнена!
+{% endblock %}
+
+{% block MainContent %}
+     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1>Добро пожаловать, {{ new_user.first_name }}!</h1>
+        <p>Регистрация прошла успешно! <a href="{% url 'login' %}">Войти</a></p>
+    </div>
+{% endblock %}

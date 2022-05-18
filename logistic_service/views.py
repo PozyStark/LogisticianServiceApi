@@ -1,0 +1,56 @@
+from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.edit import CreateView
+from .forms import UserRegistrationForm, OrdrsForm
+from .models import Order, City, Street, District
+
+
+def signup(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            new_user.set_password(user_form.cleaned_data['password'])
+            new_user.save()
+            return render(request, 'logistic_service/register_done.html', {'new_user': new_user})
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'logistic_service/signup.html', {'user_form': user_form})
+
+
+def Index(request):
+    return render(request, 'logistic_service/index.html')
+
+
+def About(request):
+    return render(request, 'logistic_service/AboutUs.html')
+
+
+def Catalogue(request):
+    return render(request, 'logistic_service/catalogue.html')
+
+
+def MyOrders(request):
+    orders = Order.objects.all()
+    cities = City.objects.all()
+    streets = Street.objects.all()
+    districts = District.objects.all()
+    return render(request, 'logistic_service/orders.html', {'Orders': orders, 'cities': cities, 'streets': streets, 'districts': districts})
+
+
+def CreateOrder(request):
+    error = ''
+    if request.method == 'POST':
+        form = OrdrsForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            error = 'Форма была неверной'
+
+    form = OrdrsForm()
+    context = {
+        'form': form,
+        'error': error
+    }
+    return render(request, 'logistic_service/createorder.html', context)

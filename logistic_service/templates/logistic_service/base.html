@@ -1,0 +1,72 @@
+<!doctype html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block Title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/pricing.css'%}">
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+    <link rel="stylesheet" href="{% static 'css/base1.css'%}">
+     <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    {%block HeaderBlock%}{%endblock%}
+</head>
+<body>
+<div id="wrap">
+    <header>
+        <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+          <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+            <p><img src="{% static 'images/logotype.png'%}" width="100" height="70" class="me-2"></p>
+            <span class="fs-4">"ТрансЛогистик"</span>
+          </a>
+          {% if user.is_authenticated %}
+          {% csrf_token %}
+          <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'home' %}">На главную</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'about' %}">О компании</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'catalogue' %}">Каталог услуг</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'orders' %}">Мои заказы</a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'logout' %}">Выйти</a>
+          </nav>
+
+          {% else %}
+              <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+                <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'home' %}">На главную</a>
+                <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'about' %}">О компании</a>
+                <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'catalogue' %}">Каталог услуг</a>
+                <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'login' %}">Войти</a>
+              </nav>
+          {% endif %}
+
+        </div>
+    </header>
+    <main>
+        {% block MainContent %}{% endblock %}
+    </main>
+</div>
+    <footer class="py-3 my-4">
+       <ul class="nav justify-content-center  pb-3 mb-3">
+          <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-muted">На главную</a></li>
+          <li class="nav-item"><a href="{% url 'catalogue' %}" class="nav-link px-2 text-muted">Каталог услуг</a></li>
+          <li class="nav-item"><a href="{% url 'about' %}" class="nav-link px-2 text-muted">О компании</a></li>
+       </ul>
+       <p class="text-center text-muted">©2020-2022 ООО "ТрансЛогистик"</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% extends 'logistic_service/base.html' %}
+{% load static %}
+
+{%block HeaderBlock%}
+
+{%endblock%}
+
+{% block Title %}
+    Заказать
+{% endblock %}
+
+{% block MainContent %}
+    <div class="container">
+        <form method="post">
+            {%csrf_token%}
+            {{form.phone_number}} <br>
+            {{form.address}} <br>
+            {{form.mass}} <br>
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Оформить заказ</button>
+            <span>{{error}}</span>
+        </form>
+    </div>
+{% endblock %}

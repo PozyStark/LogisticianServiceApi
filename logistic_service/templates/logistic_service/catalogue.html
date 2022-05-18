@@ -1,0 +1,123 @@
+{% extends 'logistic_service/base.html' %}
+{% load static %}
+
+{%block HeaderBlock%}
+
+{%endblock%}
+
+{% block Title %}
+    Каталог
+{% endblock %}
+
+{% block MainContent %}
+    {% if user.is_authenticated %}
+        {% csrf_token %}
+        <div class="container py-3">
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                  <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                      <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">1000 рублей</h4>
+                      </div>
+                      <div class="card-body">
+                        <h1 class="card-title pricing-card-title">Доставка<small class="text-muted fw-light"> внутри города</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                          <li>Выполним доставку по указанному адресу быстро и в срок</li>
+                          <li>Товар будет отправлен на следующий день</li>
+                          <li>Доставка займёт не более 2 часов</li>
+                        </ul>
+                        <p><a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'crorder' %}">Заказать</a></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                      <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">3000 рублей</h4>
+                      </div>
+                      <div class="card-body">
+                        <h1 class="card-title pricing-card-title">Доставка<small class="text-muted fw-light"> внутри региона</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                          <li>Выполним доставку по указанному адресу быстро и в срок</li>
+                          <li>Товар будет отправлен на следующий день</li>
+                          <li>Доставка займёт не более 8 часов</li>
+                        </ul>
+                        <p><a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'crorder' %}">Заказать</a></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                      <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">8000 рублей</h4>
+                      </div>
+                      <div class="card-body">
+                        <h1 class="card-title pricing-card-title">Доставка<small class="text-muted fw-light"> в соседние города</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                          <li>Выполним доставку по указанному адресу быстро и в срок</li>
+                          <li>Товар будет отправлен на следующий день</li>
+                          <li>Доставка займёт не более 2 суток</li>
+                        </ul>
+                        <p><a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'crorder' %}">Заказать</a></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        </div>
+
+    {% else %}
+        <div class="container py-3">
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                  <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                      <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">1000 рублей</h4>
+                      </div>
+                      <div class="card-body">
+                        <h1 class="card-title pricing-card-title">Доставка<small class="text-muted fw-light"> внутри города</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                          <li>Выполним доставку по указанному адресу быстро и в срок</li>
+                          <li>Товар будет отправлен на следующий день</li>
+                          <li>Доставка займёт не более 2 часов</li>
+                        </ul>
+                        <p><a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'login' %}">Заказать</a></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                      <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">3000 рублей</h4>
+                      </div>
+                      <div class="card-body">
+                        <h1 class="card-title pricing-card-title">Доставка<small class="text-muted fw-light"> внутри региона</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                          <li>Выполним доставку по указанному адресу быстро и в срок</li>
+                          <li>Товар будет отправлен на следующий день</li>
+                          <li>Доставка займёт не более 8 часов</li>
+                        </ul>
+                        <p><a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'login' %}">Заказать</a></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                      <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">8000 рублей</h4>
+                      </div>
+                      <div class="card-body">
+                        <h1 class="card-title pricing-card-title">Доставка<small class="text-muted fw-light"> в соседние города</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                          <li>Выполним доставку по указанному адресу быстро и в срок</li>
+                          <li>Товар будет отправлен на следующий день</li>
+                          <li>Доставка займёт не более 2 суток</li>
+                        </ul>
+                        <p><a class="w-100 btn btn-lg btn-outline-primary" href="{% url 'login' %}">Заказать</a></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

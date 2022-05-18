@@ -1,0 +1,26 @@
+{% extends 'logistic_service/base.html' %}
+{% load static %}
+
+{%block HeaderBlock%}
+    <link rel="stylesheet" href="{% static 'css/rows.css'%}">
+{%endblock%}
+
+{% block Title %}
+    Мои заказы
+{% endblock %}
+
+{% block MainContent %}
+<div class="container">
+    <div class="row mb-3">
+      <div class="col-4 themed-grid-col">Номер заказа</div>
+      <div class="col-4 themed-grid-col">Дата</div>
+      <div class="col-4 themed-grid-col">Статус</div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-sm-4 themed-grid-col"> </div>
+      <div class="col-sm-4 themed-grid-col"> </div>
+      <div class="col-sm-4 themed-grid-col"> </div>
+    </div>
+</div>
+{% endblock %}
