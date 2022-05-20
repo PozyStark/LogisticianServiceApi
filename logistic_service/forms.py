@@ -11,18 +11,19 @@ class UserRegistrationForm(forms.ModelForm):
         model = User
         fields = ('username', 'first_name', 'email')
 
-    def clean_password2(self):
-        cd = self.cleaned_data
-        if cd['password'] != cd['password2']:
-            raise forms.ValidationError('Пароли не совпадают.')
-        return cd['password2']
+    def clean(self):
+        cd = super().clean()
+
+        if cd.get('password') != cd.get('password2'):
+            self.add_error('password', 'Пароли не совпадают')
 
 class OrdrsForm(forms.ModelForm):
 
     class Meta:
         model = Order
         fields = ['address', 'mass', 'phone_number', 'orderer', 'state']
-        widgets = {'address': TextInput(attrs={
+        widgets = {
+            'address': TextInput(attrs={
             'class': 'form-control',
             'placeholder': 'Введите адрес'
             }),
