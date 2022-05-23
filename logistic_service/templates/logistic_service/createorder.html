@@ -13,6 +13,11 @@
     <div class="container">
         <form method="post">
             {%csrf_token%}
+            <div class="error_wrapper">
+                {% for error in form.phone_number.errors %}
+                    {{ error | escape }}
+                {% endfor %}
+            </div>
             {{form.phone_number}} <br>
             {{form.address}} <br>
             {{form.mass}} <br>

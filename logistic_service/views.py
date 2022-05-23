@@ -44,7 +44,7 @@ def Catalogue(request):
 
 
 def MyOrders(request):
-    orders = Order.objects.all()
+    orders = Order.objects.filter(orderer=request.user)
     cities = City.objects.all()
     streets = Street.objects.all()
     districts = District.objects.all()
@@ -62,9 +62,16 @@ def CreateOrder(request):
     if request.method == 'POST':
         form = OrdrsForm(request.POST)
         if form.is_valid():
+            form = form.save(commit=False)
+            form.orderer = request.user
+            form.state = 'Новый'
             form.save()
         else:
-            error = 'Форма была неверной'
+            print(form.errors)
+            form = OrdrsForm(request.POST)
+            return render(request,
+                          'logistic_service/createorder.html',
+                          context={'form': form, 'error': 'Форма неверна'})
 
     form = OrdrsForm()
     context = {
