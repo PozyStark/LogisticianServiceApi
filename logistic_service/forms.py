@@ -27,27 +27,57 @@ class OrdrsForm(forms.ModelForm):
                                        'placeholder': 'Введите номер телефона'
                                    }))
 
+    address = forms.CharField(label='Введите адрес',
+                                   widget=forms.TextInput(attrs={
+                                       'class': 'form-control',
+                                       'placeholder': 'Введите адрес'
+                                   }))
+
+    mass = forms.CharField(label='Введите массу',
+                                   widget=forms.TextInput(attrs={
+                                       'class': 'form-control',
+                                       'placeholder': 'Введите массу'
+                                   }))
+
     class Meta:
         model = Order
         fields = ['address', 'mass', 'phone_number', 'orderer', 'state']
         widgets = {
-            'address': TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите адрес'
-            }),
+            # 'address': TextInput(attrs={
+            #     'class': 'form-control',
+            #     'placeholder': 'Введите адрес'
+            # }),
             # 'phone_number': CharField(attrs={
             #     'class': 'form-control',
             #     'placeholder': 'Введите номер телефона'
             # }),
-            'mass': TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите массу заказа'
-            })
+            # 'mass': TextInput(attrs={
+            #     'class': 'form-control',
+            #     'placeholder': 'Введите массу заказа'
+            # })
         }
 
     def clean(self):
         cd = super().clean()
-        print(cd.get('phone_number'))
-        if cd.get('phone_number') is None or type(cd.get('phone_number')) != int:
-            self.add_error('phone_number', 'Введите номер телефона')
 
+        print(cd.get('phone_number'), cd.get('address'), cd.get('mass'))
+
+        if cd.get('phone_number') is None:
+            self.add_error('phone_number', 'Введите номер телефона')
+        if type(get_value_type(cd, 'phone_number')) != int:
+            self.add_error('phone_number', 'Числовое значение пример: 89121545772')
+        if cd.get('address') is None:
+            self.add_error('address', 'Введите адресс')
+        if type(cd.get('address')) != str:
+            self.add_error('address', 'Текстовое значние')
+        if cd.get('mass') is None:
+            self.add_error('mass', 'Введите массу')
+        if type(get_value_type(cd, 'mass')) != int:
+            self.add_error('mass', 'Числовое значение')
+
+
+def get_value_type(cd, key):
+    try:
+        return int(cd.get(key))
+    except ValueError:
+        return str
